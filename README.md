@@ -2,6 +2,7 @@
 
 **Powerful CLI to interact with Aersia Community's Vidya Intarweb Playlist**
 
+```txt
 Usage:
   vidya-intarweb-playlist-cli [flags]
   vidya-intarweb-playlist-cli [command]
@@ -16,3 +17,4 @@ Flags:
   -h, --help   help for vidya-intarweb-playlist-cli
 
 Use "vidya-intarweb-playlist-cli [command] --help" for more information about a command.
+```
