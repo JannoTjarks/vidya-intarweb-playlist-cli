@@ -1,6 +1,9 @@
 package cmd
 
 import (
+	"errors"
+	"os"
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -11,11 +14,22 @@ var downloadCmd = &cobra.Command{
 	Use:   "download",
 	Short: "Downloads tracks from VIP servers",
 	Long:  "Download the tracks from the VIP servers of the chosen roster. The files are downloaded as .m4a files and will also get tagged with some metadata, e.g. Title and Album/Game.",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
+		fileStat, err := os.Stat(viper.GetString(destinationPath.name))
+		if err != nil {
+			return err
+		}
+
+		if fileStat.IsDir() != true {
+			return errors.New("the given destinationPath has to be a directory")
+		}
+
 		utils.DownloadTracksByRoster(
 			viper.GetString(rosterName.name),
 			viper.GetString(destinationPath.name),
 		)
+
+		return nil
 	},
 }
 
