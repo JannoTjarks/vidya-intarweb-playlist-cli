@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/JannoTjarks/vidya-intarweb-playlist-cli/internal/utils"
+	vidyaintarwebplaylist "github.com/JannoTjarks/vidya-intarweb-playlist-cli/pkg/vidya-intarweb-playlist"
 )
 
 var downloadCmd = &cobra.Command{
@@ -33,6 +34,11 @@ func init() {
 
 		viper.BindEnv(rosterName.name, rosterName.envVar)
 
+		err := vidyaintarwebplaylist.ValidateRosterName(viper.GetString(rosterName.name))
+		if err != nil {
+			return err
+		}
+
 		fileStat, err := os.Stat(viper.GetString(destinationPath.name))
 		if err != nil {
 			return err
@@ -44,5 +50,4 @@ func init() {
 
 		return nil
 	}
-
 }

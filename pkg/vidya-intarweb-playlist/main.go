@@ -79,3 +79,14 @@ func getRosterURL(rosterName string) (string, error) {
 		return "", errors.New("the rosterName must be one of the following entries\n\t1. vip\n\t2. source\n\t3. mellow\n\t4. exiled")
 	}
 }
+
+func ValidateRosterName(rosterName string) error {
+	if rosterName == "vip" ||
+		rosterName == "source" ||
+		rosterName == "mellow" ||
+		rosterName == "exciled" {
+		return nil
+	}
+
+	return errors.New("the rosterName must be one of the following entries\n\t1. vip\n\t2. source\n\t3. mellow\n\t4. exiled")
+}
